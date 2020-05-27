@@ -14,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -26,18 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(request()->category){
-            $products = Product::with('categories')->whereHas('categories', function ($query) {
-                $query->where('name', request()->category);
-            })->get();
-            $categories = Category::all();
-        }else{
-            $categories = Category::all();
-            $products = Product::inRandomOrder()->take(12)->get();
-        }
+        $categories = Category::all();
 
         return view('home')->with([
-            'products' => $products,
             'categories' => $categories,
         ]);
     }

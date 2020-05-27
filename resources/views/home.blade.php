@@ -14,6 +14,8 @@
                 <a href="{{ route('category', ['category' => $category->name]) }}" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
+
+        
         @endforeach
     </div>
 </header>
