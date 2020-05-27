@@ -11,7 +11,7 @@
         <img class="card-img-top" src="{{$category->image}}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{$category->name}} Pokémon</h5>
-                <a href="{{ route('category', ['category' => $category->name]) }}" class="btn btn-primary">Go somewhere</a>
+                <a href="{{ route('category', ['category' => $category->name]) }}" class="btn btn-primary">Show products</a>
             </div>
         </div>
 

@@ -9,7 +9,13 @@
             <div class="card-body bg-light">
                 <p class="card-title">Name: <b>{{ $product->name }}</b></p>
                 <p>Price: <b>&euro; {{ $product->price }},-</b></p>
-                <button type="button" class="btn p-0" onclick=""><i class="fas fa-cart-plus"></i></button>
+                <form action="{{ route('cart.store') }}" method="POST">
+                {{ csrf_field() }}
+                    <input type="hidden" name="id" value="{{ $product->id }}">
+                    <input type="hidden" name="name" value="{{ $product->name }}">
+                    <input type="hidden" name="price" value="{{ $product->price }}">
+                    <button type="submit" class="btn p-0"><i class="fas fa-cart-plus"></i></button>
+                </form>
             </div>
         </div>
         @endforeach
