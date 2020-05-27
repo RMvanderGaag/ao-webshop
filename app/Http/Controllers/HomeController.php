@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Category;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('/home');
+        if(request()->category){
+            $products = Product::with('categories')->whereHas('categories', function ($query) {
+                $query->where('name', request()->category);
+            })->get();
+            $categories = Category::all();
+        }else{
+            $categories = Category::all();
+            $products = Product::inRandomOrder()->take(12)->get();
+        }
+
+        return view('home')->with([
+            'products' => $products,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function categoryPage()
+    {
+        $products = Product::with('categories')->whereHas('categories', function ($query) {
+            $query->where('name', request()->category);
+        })->get();
+
+        return view('category')->with([
+            'products' => $products
+        ]);
     }
 }
