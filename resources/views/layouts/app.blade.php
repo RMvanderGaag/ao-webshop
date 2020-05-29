@@ -55,7 +55,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item pt-2 mr-5"><a href="{{ route('cart.index') }}" class="link text-dark"><i class="fas fa-shopping-cart"></i></a><span>{{ Cart::count() }}</span></li>
+                            <li class="nav-item pt-2 mr-5"><a href="{{ route('cart.shoppingCart') }}" class="link text-dark"><i class="fas fa-shopping-cart"></i></a><span>{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

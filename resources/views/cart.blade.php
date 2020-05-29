@@ -23,25 +23,31 @@
         @endif
     </div>
 
-@if (Cart::count() > 0)
+@if (Session::has('cart'))
     
-    <h4>There is/are {{ Cart::count() }} item(s) inside of the shopping cart</h4>
+    <h4>There is/are {{ Session::get('cart')->totalQty }} item(s) inside of the shopping cart</h4>
     <div class="table mt-5">
-    @foreach (Cart::content() as $item)
+    @foreach ($products as $product)
         <div class="row border-bottom align-items-center">
-            <img class="checkoutImg" src="{{ $item->model->image }}" alt="">
-            <h4 class="ml-5">{{$item->model->name}}</h4>
-            
-            <h4 class="ml-5">&euro; {{$item->model->price}}</h4>
-            <div>
-                <form action="{{ route('cart.destroy', $item->rowId) }}" method="post">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE')}}
-                    <button class="btn" type="submit">Remove from cart</button>
-                </form>
+            <img class="checkoutImg" src="{{ $product['item']['image'] }}" alt="">
+            <h4 class="ml-5">{{ $product['item']['name'] }}</h4>
+            <h4 class="ml-5">&euro; {{$product['price']}}</h4>
+            <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">action <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Remove 1 item</a></li>
+                    <li><a href="#">Remove all</a></li>
+                </ul>
             </div>
         </div>
     @endforeach
+    </div>
+    <div>
+        <strong>Total: {{ $totalPrice }}</strong>
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-success">Proceed to checkout</button>
     </div>
 @else
     <h3>There are no items inside the shopping cart</h3>

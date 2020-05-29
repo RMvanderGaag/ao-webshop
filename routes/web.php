@@ -24,10 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/category', 'HomeController@categoryPage')->name('category');
 
-Route::get('/cart', 'CartController@index')->name('cart.index');
-Route::post('/cart', 'CartController@store')->name('cart.store');
-Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
+Route::get('/cart/{id}', 'HomeController@addToCart')->name('cart.addToCart');
 
-Route::get('empty', function () {
-    Cart:destroy();
-});
+Route::get('/shopping-cart', 'HomeController@showCart')->name('cart.shoppingCart');
+
