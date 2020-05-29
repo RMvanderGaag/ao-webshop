@@ -22,9 +22,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/category', 'HomeController@categoryPage')->name('category');
+Route::get('/category/{category}', 'HomeController@categoryPage')->name('category');
 
-Route::get('/cart/{id}', 'HomeController@addToCart')->name('cart.addToCart');
+Route::get('/add-product/{id}', 'CartController@addToCart')->name('cart.addToCart');
 
-Route::get('/shopping-cart', 'HomeController@showCart')->name('cart.shoppingCart');
+Route::get('/reduce-product/{id}', 'CartController@reduceProduct')->name('cart.reduceProduct');
 
+Route::get('/shopping-cart', 'CartController@showCart')->name('cart.shoppingCart');
+
+Route::get('/remove-product/{id}', 'CartController@removeProduct')->name('cart.removeProduct');

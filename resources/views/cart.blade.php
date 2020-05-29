@@ -5,23 +5,6 @@
 @section('content')
 
 <div class="container">
-    <div>
-        @if (session()->has('success_message'))
-            <div class="alert alert-success">
-                {{ session()->get('success_message') }}
-            </div>
-        @endif
-
-        @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
 
 @if (Session::has('cart'))
     
@@ -31,19 +14,20 @@
         <div class="row border-bottom align-items-center">
             <img class="checkoutImg" src="{{ $product['item']['image'] }}" alt="">
             <h4 class="ml-5">{{ $product['item']['name'] }}</h4>
-            <h4 class="ml-5">&euro; {{$product['price']}}</h4>
-            <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">action <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Remove 1 item</a></li>
-                    <li><a href="#">Remove all</a></li>
-                </ul>
+            <h4 class="ml-5">&euro; {{$product['price']}},-</h4>
+            <h4 class="ml-5">{{ $product['qty'] }}</h4>
+            <div class="ml-5 btn-group">
+            <button type="button" class="btn btn-primary btn-xs dropdown-toggle float-right" data-toggle="dropdown">action <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('cart.reduceProduct', ['id' => $product['item']['id']]) }}">Remove 1 item</a></li>
+                <li><a href="{{ route('cart.removeProduct', ['id' => $product['item']['id']]) }}">Remove all</a></li>
+            </ul>
             </div>
         </div>
     @endforeach
     </div>
     <div>
-        <strong>Total: {{ $totalPrice }}</strong>
+        <strong>Total: &euro; {{ $totalPrice }},-</strong>
     </div>
 
     <div>
