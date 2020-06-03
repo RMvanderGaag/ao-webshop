@@ -51,5 +51,9 @@ class Cart
         unset($this->items[$id]);
     }
 
-    
+    public function destroy(){
+        $this->totalQty = 0;
+        $this->totalPrice = 0;
+        unset($this->items);
+    }
 }

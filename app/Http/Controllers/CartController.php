@@ -54,4 +54,11 @@ class CartController extends Controller
         return view('checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
+    public function destroyCart(){
+        $cart = Session::get('cart');
+        $cart->destroy();
+        
+        return redirect()->route('home');
+    }
+
 }

@@ -6,7 +6,7 @@
 
 <div class="container">
 
-@if (Session::has('cart'))
+@if (Session::has('cart') and Session::get('cart')->totalQty > 0)
     
     <h4>There is/are {{ Session::get('cart')->totalQty }} item(s) inside of the shopping cart</h4>
     <div class="table mt-5">
@@ -35,7 +35,7 @@
     </div>
 @else
     <h3>There are no items inside the shopping cart</h3>
-    <a href="{{ route('/') }}">Continue shopping</a>
+    <a href="{{ route('home') }}">Continue shopping</a>
 @endif
 </div
 

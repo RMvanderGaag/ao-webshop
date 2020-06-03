@@ -16,6 +16,8 @@ class OrderController extends Controller
           'order_price' => $request->order_price
       ]);
 
-      return redirect('/');
+
+
+      return redirect('/destroy-cart');
     }
 }
