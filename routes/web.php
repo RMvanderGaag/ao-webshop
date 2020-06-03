@@ -15,19 +15,23 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 */
 
 Route::get('/', function () {
-    return view('/home');
+    return view('/');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/category/{category}', 'HomeController@categoryPage')->name('category');
 
-Route::get('/add-product/{id}', 'CartController@addToCart')->name('cart.addToCart');
+Route::get('/product/{name}', 'HomeController@productPage')->name('product.info');
 
-Route::get('/reduce-product/{id}', 'CartController@reduceProduct')->name('cart.reduceProduct');
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/add-product/{id}', 'CartController@addToCart')->name('cart.addToCart');
 
-Route::get('/shopping-cart', 'CartController@showCart')->name('cart.shoppingCart');
+    Route::get('/reduce-product/{id}', 'CartController@reduceProduct')->name('cart.reduceProduct');
 
-Route::get('/remove-product/{id}', 'CartController@removeProduct')->name('cart.removeProduct');
+    Route::get('/shopping-cart', 'CartController@showCart')->name('cart.shoppingCart');
+
+    Route::get('/remove-product/{id}', 'CartController@removeProduct')->name('cart.removeProduct');
+});
