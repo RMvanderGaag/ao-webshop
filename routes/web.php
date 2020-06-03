@@ -34,4 +34,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/shopping-cart', 'CartController@showCart')->name('cart.shoppingCart');
 
     Route::get('/remove-product/{id}', 'CartController@removeProduct')->name('cart.removeProduct');
+
+    Route::get('/checkout', 'cartController@checkoutPage')->name('checkoutPage');
 });

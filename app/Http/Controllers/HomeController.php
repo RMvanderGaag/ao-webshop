@@ -52,6 +52,4 @@ class HomeController extends Controller
             'product' => $product
         ]);
     }
-
-
 }

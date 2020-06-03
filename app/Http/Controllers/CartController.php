@@ -46,4 +46,12 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    
+    public function checkoutPage(){
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        return view('checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
 }

@@ -18,35 +18,35 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Charmander',
             'price' => 10,
-            'description' => 'Vuur pokémon',
+            'description' => 'Fire pokémon',
             'image' => 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
         ])->categories()->attach(1);
 
         Product::create([
             'name' => 'cyndaquil',
             'price' => 20,
-            'description' => 'Vuur pokémon',
+            'description' => 'Fire pokémon',
             'image' => 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/155.png'
         ])->categories()->attach(1);
 
         Product::create([
             'name' => 'Blaziken',
             'price' => 200,
-            'description' => 'Vuur pokémon',
+            'description' => 'Fire / Fighting pokémon',
             'image' => 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/257.png'
         ])->categories()->attach([1, 4]);
 
         Product::create([
             'name' => 'Magmar',
             'price' => 150,
-            'description' => 'Vuur pokémon',
+            'description' => 'Fire pokémon',
             'image' => 'http://qtoptens.com/wp-content/uploads/2019/01/Magmar.png'
         ])->categories()->attach(1);
 
         Product::create([
             'name' => 'Moltres',
             'price' => 999,
-            'description' => 'Vuur pokémon',
+            'description' => 'Fire pokémon',
             'image' => 'https://i.redd.it/4pebdtwy5f231.png'
         ])->categories()->attach(1);
 
@@ -77,7 +77,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Poliwrath',
             'price' => 80,
-            'description' => 'Water pokémon',
+            'description' => 'Water / Fighting pokémon',
             'image' => 'https://giantbomb1.cbsistatic.com/uploads/scale_small/13/135472/1891831-062poliwrath.png',
         ])->categories()->attach([2, 4]);
 
@@ -122,7 +122,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Lotad',
             'price' => 10,
-            'description' => 'Grass pokémon',
+            'description' => 'Water / Grass pokémon',
             'image' => 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/270.png',
         ])->categories()->attach([3, 2]);
 

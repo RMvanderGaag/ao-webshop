@@ -31,11 +31,11 @@
     </div>
 
     <div>
-        <button type="button" class="btn btn-success">Proceed to checkout</button>
+        <a href="{{ route('checkoutPage') }}" class="btn btn-success">Proceed to checkout</a>
     </div>
 @else
     <h3>There are no items inside the shopping cart</h3>
-    <a href="{{ route('home') }}">Continue shopping</a>
+    <a href="{{ route('/') }}">Continue shopping</a>
 @endif
 </div
 
