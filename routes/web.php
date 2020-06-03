@@ -24,7 +24,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/category/{category}', 'HomeController@categoryPage')->name('category');
 
-Route::get('/product/{name}', 'HomeController@productPage')->name('product.info');
+Route::get('/product/{id}', 'HomeController@productPage')->name('product.info');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/add-product/{id}', 'CartController@addToCart')->name('cart.addToCart');

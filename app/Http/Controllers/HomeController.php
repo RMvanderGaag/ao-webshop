@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use DB;
 
 class HomeController extends Controller
 {
@@ -43,8 +44,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function productPage()
+    public function productPage($id)
     {
+        $product = DB::table('products')->get()->where('id', $id)[$id - 1];
+
+        return view('product')->with([
+            'product' => $product
+        ]);
     }
 
 
