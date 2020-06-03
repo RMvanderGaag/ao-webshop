@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Order;
+use DB;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -16,8 +18,14 @@ class OrderController extends Controller
           'order_price' => $request->order_price
       ]);
 
-
-
       return redirect('/destroy-cart');
+    }
+
+    public function index(){
+      $orders = DB::table('orders')->get()->where('user_id', Auth::user()->id);
+
+      return view('orderDetails')->with([
+        'orders' => $orders
+      ]);
     }
 }
