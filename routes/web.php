@@ -14,10 +14,6 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 |
 */
 
-Route::get('/', function () {
-    return view('/');
-});
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -35,5 +31,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/remove-product/{id}', 'CartController@removeProduct')->name('cart.removeProduct');
 
-    Route::get('/checkout', 'cartController@checkoutPage')->name('checkoutPage');
+    Route::get('/checkout', 'CartController@checkoutPage')->name('checkoutPage');
+
+    Route::post('/Order', 'OrderController@store')->name('order.store');
 });

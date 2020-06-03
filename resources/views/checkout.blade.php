@@ -19,7 +19,14 @@
             </div>
             <hr>
             <p class="float-left"><b>Price: {{ $totalPrice }},-</b></p>
-            <a class="float-right btn-success p-2 rounded" href="">Place order</a>
+            <form action="{{ route('order.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="user_email" value="{{ Auth::user()->email }}">
+                <input type="hidden" name="user_name" value="{{ Auth::user()->name }}">
+                <input type="hidden" name="order_price" value="{{ $totalPrice }}">
+                <button type="submit" class="float-right btn-success p-2 rounded" href="">Place order</button>
+            </form>
         </div>
     </div>
 @endsection
