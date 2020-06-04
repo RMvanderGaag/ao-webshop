@@ -16,7 +16,7 @@ class CartController extends Controller
         $cart->add($product, $product->id);
 
         Session::put('cart', $cart);
-        return redirect()->route('home');
+        return redirect()->back()->with('message', 'Item has been added to your shopping cart!');
     }
 
     public function showCart() {
@@ -34,7 +34,7 @@ class CartController extends Controller
         $cart->removeOneItem($id);
 
         Session::put('cart', $cart);
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Item has been removed from your shopping cart!');
     }
 
     public function removeProduct($id){
@@ -43,7 +43,7 @@ class CartController extends Controller
         $cart->removeItem($id);
 
         Session::put('cart', $cart);
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Items are removed from your shopping cart!');
     }
 
     

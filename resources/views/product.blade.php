@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+        {{ session()->get('message') }}
+        </div>
+        @endif
         <div class="row mt-5">
             <div class="col-6">
                 <img class="w-75" src="{{ $product->image }}" alt="{{ $product->name }} image">

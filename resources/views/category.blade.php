@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
     <div class="row">
         @foreach ($products as $product)
         <div class="col-3 m-3">

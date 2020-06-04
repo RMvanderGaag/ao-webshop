@@ -5,7 +5,11 @@
 @section('content')
 
 <div class="container">
-
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 @if (Session::has('cart') and Session::get('cart')->totalQty > 0)
     
     <h4>There is/are {{ Session::get('cart')->totalQty }} item(s) inside of the shopping cart</h4>
@@ -17,11 +21,9 @@
             <h4 class="ml-5">&euro; {{$product['price']}},-</h4>
             <h4 class="ml-5">{{ $product['qty'] }}</h4>
             <div class="ml-5 btn-group">
-            <button type="button" class="btn btn-primary btn-xs dropdown-toggle float-right" data-toggle="dropdown">action <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="{{ route('cart.reduceProduct', ['id' => $product['item']['id']]) }}">Remove 1 item</a></li>
-                <li><a href="{{ route('cart.removeProduct', ['id' => $product['item']['id']]) }}">Remove all</a></li>
-            </ul>
+                <a class="ml-5 bg-success p-2 rounded" href="{{ route('cart.addToCart', ['id' => $product['item']['id']]) }}"><i class="text-light fas fa-plus"></i></a>
+                <a class="ml-5 bg-danger p-2 rounded" href="{{ route('cart.reduceProduct', ['id' => $product['item']['id']]) }}"><i class="text-light fas fa-minus"></i></a>
+                <a class="ml-5 bg-danger p-2 rounded" href="{{ route('cart.removeProduct', ['id' => $product['item']['id']]) }}"><i class="text-light fas fa-times"></i></a>
             </div>
         </div>
     @endforeach
