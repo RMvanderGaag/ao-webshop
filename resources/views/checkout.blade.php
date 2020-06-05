@@ -3,6 +3,7 @@
     <div class="container">
         <div class="jumbotron mt-5">
             <h3 class="lead">User details</h3>
+            {{-- Alle gegevens van de ingelogde gebruiker worden weergeven --}}
             <p>Name: <b>{{ Auth::user()->name }}</b></p>
             <p>Email adress: <b>{{ Auth::user()->email }}</b></p>
             <p>City: <b>{{ Auth::user()->city }}</b></p>

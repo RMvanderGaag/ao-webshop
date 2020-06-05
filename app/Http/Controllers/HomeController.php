@@ -24,28 +24,40 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    /**
+     * De home pagina
+     */
     public function index()
     {
         $categories = Category::all();
 
+        //Alle categorieen worden hier naartoe gestuurd
         return view('home')->with([
             'categories' => $categories,
         ]);
     }
 
-    public function categoryPage()
+    /**
+     * Alle producten die bij de gekozen categorie hoort worden weergegeven
+     */
+    public function categoryPage($id)
     {
-        $products = Product::with('categories')->whereHas('categories', function ($query) {
-            $query->where('name', request()->category);
-        })->get();
+        //Alle producten die bij de categorie horen worden doorgestuurd
+        $products = DB::table('products')->get()->where('cat_id', $id);
 
         return view('category')->with([
             'products' => $products
         ]);
     }
 
+    /**
+     * De informatie pagina van het product
+     * @param int $id
+     */
     public function productPage($id)
     {
+        //Alle prodcuten waar het meegestuurde id gelijk is aan het id in de Database worden opgehaald
         $product = DB::table('products')->get()->where('id', $id)[$id - 1];
 
         return view('product')->with([

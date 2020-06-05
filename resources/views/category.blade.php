@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+{{-- Kijkt of de session een message heeft om te weergeven --}}
 @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -14,6 +15,7 @@
             <div class="card-body bg-light">
                 <p class="card-title">Name: <b>{{ $product->name }}</b></p>
                 <p>Price: <b>&euro; {{ $product->price }},-</b></p>
+                
                 <a href="{{ route('cart.addToCart', ['id' => $product->id]) }}" class="btn p-0"><i class="fas fa-cart-plus"></i></a>
                 <a href="{{ route('product.info', ['id' => $product->id]) }}" class="btn py-0"><i class="fas fa-eye"></i></a>
             </div>

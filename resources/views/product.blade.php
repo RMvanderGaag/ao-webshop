@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        {{-- Kijkt of de session een message heeft om te weergeven --}}
         @if(session()->has('message'))
         <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -15,6 +16,7 @@
                 <p>{{ $product->description }}</p>
 
                 <div class="mt-5">
+                    {{-- Als de gebruiker niet is ingelogd word er eerst gevraagd om inteloggen voordat er iets aan het winkelmandje word toegevoegd  --}}
                     @guest
                         <p>Add this product to your cart? Make sure you <a href="{{ route('login') }}"><u>login</u></a> first!</p>
             

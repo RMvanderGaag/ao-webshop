@@ -10,6 +10,9 @@ use Auth;
 
 class OrderController extends Controller
 {
+    /**
+     * Als een bestelling is geplaats dan word er een nieuwe record aangemaakt in de Database
+     */
     public function store(Request $request){
       Order::create([
           'user_id' => $request->user_id,
@@ -21,6 +24,9 @@ class OrderController extends Controller
       return redirect('/destroy-cart');
     }
 
+    /**
+     * Haalt alle orders op van de gene die op dit moment is ingelogd 
+     */
     public function index(){
       $orders = DB::table('orders')->get()->where('user_id', Auth::user()->id);
 

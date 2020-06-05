@@ -5,11 +5,13 @@
 @section('content')
 
 <div class="container">
+{{-- Kijkt of de session een message heeft om te weergeven --}}
 @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
 @endif
+{{-- Als de sessie een 'cart' heeft en de hoeveelheid is groter dan 0 moet hij laten zien wat er in de shopping cart zit, anders niet --}}
 @if (Session::has('cart') and Session::get('cart')->totalQty > 0)
     
     <h4>There is/are {{ Session::get('cart')->totalQty }} item(s) inside of the shopping cart</h4>

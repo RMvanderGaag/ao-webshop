@@ -18,10 +18,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/category/{category}', 'HomeController@categoryPage')->name('category');
+Route::get('/category/{cat_id}', 'HomeController@categoryPage')->name('category');
 
 Route::get('/product/{id}', 'HomeController@productPage')->name('product.info');
 
+/**
+ * Er is een route group aangemaakt om te voorkomen dat niet ingelogde gebruikers naar de URL's kunnen gaan
+ */
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/add-product/{id}', 'CartController@addToCart')->name('cart.addToCart');
 

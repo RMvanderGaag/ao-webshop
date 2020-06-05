@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->text('description');
             $table->string('image');
+            $table->integer('cat_id');
         });
     }
 
