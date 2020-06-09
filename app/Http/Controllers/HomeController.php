@@ -44,7 +44,7 @@ class HomeController extends Controller
     public function categoryPage($id)
     {
         //Alle producten die bij de categorie horen worden doorgestuurd
-        $products = DB::table('products')->get()->where('cat_id', $id);
+        $products = Product::where('cat_id', $id)->get();
 
         return view('category')->with([
             'products' => $products
@@ -58,7 +58,7 @@ class HomeController extends Controller
     public function productPage($id)
     {
         //Alle prodcuten waar het meegestuurde id gelijk is aan het id in de Database worden opgehaald
-        $product = DB::table('products')->get()->where('id', $id)[$id - 1];
+        $product = Product::find($id);
 
         return view('product')->with([
             'product' => $product

@@ -1,17 +1,19 @@
 <?php
 
 namespace App;
+use Session;
 
 
 class Cart
 {
     //Wanneer de cart word aangemaakt worden deze properties aangemaakt
-    public $items = null;
-    public $totalQty = 0;
-    public $totalPrice = 0;
+    private $items = null;
+    private $totalQty = 0;
+    private $totalPrice = 0;
 
     //Als er al een cart bestaat worden de gegevens van de oude cart in de nieuwe gezet
-    public function __construct($oldCart){
+    public function __construct(){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
         if($oldCart){
             $this->items = $oldCart->items;
             $this->totalQty = $oldCart->totalQty;
@@ -42,6 +44,9 @@ class Cart
         $this->items[$id] = $storedItem;
         $this->totalQty++;
         $this->totalPrice += $item->price;
+        
+        //De cart word opgeslagen in de Session
+        Session::put('cart', $this);
     }
 
     /**
@@ -59,6 +64,9 @@ class Cart
         if($this->items[$id]['qty'] <= 0){
             unset($this->items[$id]);
         }
+
+        //De cart word aan de session toe gevoegd
+        Session::put('cart', $cart);
     }
 
     /**
@@ -71,16 +79,18 @@ class Cart
         $this->totalPrice -= $this->items[$id]['price'];
         //Als laatst word het product zelf verwijderd
         unset($this->items[$id]);
+
+        //De cart word aan de session toe gevoegd
+        Session::put('cart', $cart);
     }
 
-    /**
-     * Als je gebruiker een bestelling heeft geplaats word alle inhoud van het winkelmandje verwijderd
-     */
     public function destroy(){
-        //De qty en de pijs van het totale winkelmandje word op 0 gezet
-        $this->totalQty = 0;
-        $this->totalPrice = 0;
-        //Daarna word de gehele array 'items' verwijderd
-        unset($this->items);
+        Session::forget('cart');
+    }
+
+    public function __get($propName){
+        if(property_exists($this, $propName)){
+            return $this->$propName;
+        }
     }
 }

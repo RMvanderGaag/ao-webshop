@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @if (!empty($orders))
         <table class="table">
             <tr>
                 <th>Order number</th>
@@ -18,8 +17,5 @@
                </tr>
             @endforeach
         </table>
-        @else
-            <p>There are no orders</p>
-        @endif
     </div>
 @endsection

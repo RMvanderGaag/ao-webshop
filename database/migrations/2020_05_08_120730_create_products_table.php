@@ -19,7 +19,8 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->text('description');
             $table->string('image');
-            $table->integer('cat_id');
+            $table->integer('cat_id')->unsigned();
+            $table->foreign('cat_id')->references('id')->on('categories');
         });
     }
 

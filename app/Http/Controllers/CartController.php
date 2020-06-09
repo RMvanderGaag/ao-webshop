@@ -16,15 +16,11 @@ class CartController extends Controller
     public function addToCart($id){
         //Het product word opgehaald met de parameter
         $product = Product::find($id);
-        //Er word gekeken of er al een cart bestaat
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
         //Een nieuwe cart word aangemaakt
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
         //Er word een functie uitgevoerd in Cart.php om de producten toe te voegen
         $cart->add($product, $product->id);
 
-        //De cart word opgeslagen in de Session
-        Session::put('cart', $cart);
         return redirect()->back()->with('message', 'Item has been added to your shopping cart!');
     }
 
@@ -36,11 +32,10 @@ class CartController extends Controller
         if(!Session::has('cart')){
             return view('cart');
         }
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
 
         //De view word ingeladen en daarmee worden alle producten en de totaalprijs mee meegestuurd
-        return view('cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+        return view('cart', ['products' => $cart->items]);
     }
 
     /**
@@ -48,14 +43,10 @@ class CartController extends Controller
      * @param int $id
      */
     public function reduceProduct($id){
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
 
         //Er word een functie uitgevoerd in Cart.php om de één product te verwijderen
         $cart->removeOneItem($id);
-
-        //De cart word aan de session toe gevoegd
-        Session::put('cart', $cart);
 
         return redirect()->back()->with('message', 'Item has been removed from your shopping cart!');
     }
@@ -65,13 +56,11 @@ class CartController extends Controller
      * @param int $id
      */
     public function removeProduct($id){
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
 
         //Er word een functie uitgevoerd in Cart.php om alle producten te verwijderen
         $cart->removeItem($id);
 
-        Session::put('cart', $cart);
         return redirect()->back()->with('message', 'Items are removed from your shopping cart!');
     }
 
@@ -79,8 +68,7 @@ class CartController extends Controller
      * De afreken pagina word weergegeven
      */
     public function checkoutPage(){
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
 
         //Naar deze pagina worden alle producten en het totaalbedraag meegestuurd
         return view('checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
@@ -90,10 +78,9 @@ class CartController extends Controller
      * Als de gebruiker de betaling heeft afgerond word de shopping cart weer leeggemaakt
      */
     public function destroyCart(){
-        $cart = Session::get('cart');
-        //Er word een functie uitgevoerd in Cart.php om de cart te verwijderen
+        $cart = new Cart();
         $cart->destroy();
-        
+        //Er word een functie uitgevoerd in Cart.php om de cart te verwijderen
         return redirect()->route('home')->with('message', 'Your order has been placed!');
     }
 

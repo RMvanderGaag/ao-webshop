@@ -14,7 +14,7 @@
             <div class="col-6">
                 <h3>{{ $product->name }}</h3>
                 <p>{{ $product->description }}</p>
-
+                <p>&euro; {{ $product->price }}</p>
                 <div class="mt-5">
                     {{-- Als de gebruiker niet is ingelogd word er eerst gevraagd om inteloggen voordat er iets aan het winkelmandje word toegevoegd  --}}
                     @guest

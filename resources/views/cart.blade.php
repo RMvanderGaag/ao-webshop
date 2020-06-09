@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -11,8 +9,8 @@
         {{ session()->get('message') }}
     </div>
 @endif
-{{-- Als de sessie een 'cart' heeft en de hoeveelheid is groter dan 0 moet hij laten zien wat er in de shopping cart zit, anders niet --}}
-@if (Session::has('cart') and Session::get('cart')->totalQty > 0)
+{{-- Als de sessie een 'cart' heeft en de hoeveelheid is gro ter dan 0 moet hij laten zien wat er in de shopping cart zit, anders niet --}}
+@if (Session::has('cart'))
     
     <h4>There is/are {{ Session::get('cart')->totalQty }} item(s) inside of the shopping cart</h4>
     <div class="table mt-5">
@@ -31,7 +29,7 @@
     @endforeach
     </div>
     <div>
-        <strong>Total: &euro; {{ $totalPrice }},-</strong>
+        <strong>Total: &euro; {{ Session::get('cart')->totalPrice }},-</strong>
     </div>
 
     <div>
