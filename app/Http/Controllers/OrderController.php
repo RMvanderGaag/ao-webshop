@@ -28,7 +28,7 @@ class OrderController extends Controller
      * Haalt alle orders op van de gene die op dit moment is ingelogd 
      */
     public function index(){
-      $orders = DB::table('orders')->get()->where('user_id', Auth::user()->id);
+      $orders = Order::where('user_id', Auth::user()->id)->get();
 
       return view('orderDetails')->with([
         'orders' => $orders
