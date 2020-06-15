@@ -84,10 +84,16 @@ class Cart
         Session::put('cart', $cart);
     }
 
+    /**
+     * De cart word uit de session verwijderd
+     */
     public function destroy(){
         Session::forget('cart');
     }
 
+    /**
+     * Er word een getter aangemaakt om de properties op te halen
+     */
     public function __get($propName){
         if(property_exists($this, $propName)){
             return $this->$propName;

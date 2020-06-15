@@ -19,7 +19,7 @@
                 @endforeach
             </div>
             <hr>
-            <p class="float-left"><b>Price: {{ Session::get('cart')->totalPrice }},-</b></p>
+            <p class="float-left"><b>Price: {{ $totalPrice }},-</b></p>
             <form action="{{ route('order.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
